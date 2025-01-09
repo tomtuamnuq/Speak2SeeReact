@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/speak2see-logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Speak2See - Turn your speech into stunning images using AI"
+    />
+    <meta name="theme-color" content="#1E40AF" />
+    <meta name="application-name" content="Speak2See" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Speak2See" />
+    <meta property="og:title" content="Speak2See" />
+    <meta
+      property="og:description"
+      content="Transform your voice into beautiful images instantly"
+    />
+    <meta property="og:type" content="website" />
+    <link rel="apple-touch-icon" href="/speak2see-logo.svg" />
+    <title>Speak2See | Voice to Image Transformation</title>
+
+    <!-- Loading state styles -->
+    <style>
+      .loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f9fafb;
+      }
+      @media (prefers-color-scheme: dark) {
+        .loading-container {
+          background: #111827;
+        }
+      }
+      .loading-logo {
+        width: 80px;
+        height: 80px;
+        position: relative;
+      }
+      .loading-logo img {
+        width: 100%;
+        height: 100%;
+      }
+      .loading-overlay {
+        position: absolute;
+        inset: 0;
+        animation: spin 20s linear infinite;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="h-full">
+    <div id="root">
+      <!-- Loading state -->
+      <div class="loading-container">
+        <div class="loading-logo">
+          <img src="/speak2see-logo.svg" alt="Speak2See" />
+          <div class="loading-overlay">
+            <svg viewBox="0 0 100 100">
+              <path
+                fill="currentColor"
+                class="text-blue-500 opacity-30"
+                d="M50,0 C55,25 75,35 95,50 C75,65 55,75 50,100 C45,75 25,65 5,50 C25,35 45,25 50,0"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#232F3E;stop-opacity:1" /> <!-- AWS Dark Blue -->
+      <stop offset="100%" style="stop-color:#4F46E5;stop-opacity:1" /> <!-- Indigo -->
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clip path for the processing circle -->
+    <clipPath id="processingClip">
+      <circle cx="100" cy="100" r="80"/>
+    </clipPath>
+  </defs>
+
+  <!-- Main circular background -->
+  <circle cx="100" cy="100" r="90" fill="url(#bgGradient)"/>
+
+  <!-- AWS Service Flow representation -->
+  <g clip-path="url(#processingClip)">
+    <!-- Step Functions Flow Lines -->
+    <path d="M40 100 C 60 60, 140 140, 160 100" 
+          stroke="#FF9900" strokeWidth="3" fill="none" 
+          filter="url(#glow)">
+      <animate attributeName="stroke-dasharray" 
+               from="0,1000" to="1000,0"
+               dur="3s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- S3 Bucket representation -->
+    <path d="M 30 100 L 45 85 L 60 100 L 45 115 Z" 
+          fill="#FF9900" opacity="0.8"/>
+
+    <!-- DynamoDB Table representation -->
+    <rect x="140" y="85" width="30" height="30" 
+          fill="#FF9900" opacity="0.8"/>
+  </g>
+
+  <!-- Audio waveform representing speech input -->
+  <g transform="translate(70,80)">
+    <!-- Dynamic waveform -->
+    <path d="M0 20 Q 10 0, 20 20 Q 30 40, 40 20 Q 50 0, 60 20" 
+          stroke="white" strokeWidth="3" fill="none">
+      <animate attributeName="d" 
+               values="M0 20 Q 10 0, 20 20 Q 30 40, 40 20 Q 50 0, 60 20;
+                       M0 20 Q 10 40, 20 20 Q 30 0, 40 20 Q 50 40, 60 20;
+                       M0 20 Q 10 0, 20 20 Q 30 40, 40 20 Q 50 0, 60 20"
+               dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Image output representation -->
+  <g transform="translate(70,120)">
+    <!-- Image frame -->
+    <rect x="0" y="0" width="60" height="40" 
+          stroke="white" strokeWidth="2" fill="none"/>
+    <!-- Abstract image content -->
+    <path d="M0 40 L20 20 L40 30 L60 40" 
+          stroke="white" strokeWidth="2" fill="none"/>
+    <circle cx="45" cy="15" r="5" 
+            fill="white" opacity="0.8"/>
+  </g>
+
+  <!-- Processing indicator -->
+  <circle cx="100" cy="100" r="88" 
+          stroke="white" strokeWidth="2" 
+          fill="none" opacity="0.3">
+    <animateTransform attributeName="transform"
+                      type="rotate"
+                      from="0 100 100"
+                      to="360 100 100"
+                      dur="10s"
+                      repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Center connection point -->
+  <circle cx="100" cy="100" r="5" 
+          fill="white" opacity="0.8"/>
+</svg>
