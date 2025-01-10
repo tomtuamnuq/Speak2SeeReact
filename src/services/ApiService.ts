@@ -4,6 +4,7 @@ import {
   ItemDetails,
   GetAllResponse,
 } from "../../shared/types";
+import { MAX_BINARY_AUDIO_SIZE } from "../../shared/limits";
 import {
   mockGetAllResponse,
   mockGetImageFailed,
@@ -34,6 +35,13 @@ class ApiService {
     return `Bearer ${idToken}`;
   }
   async uploadAudio(audioBlob: Blob): Promise<ProcessingItem> {
+    if (audioBlob.size > MAX_BINARY_AUDIO_SIZE) {
+      throw new Error(
+        `Audio file size exceeds maximum allowed size of ${
+          MAX_BINARY_AUDIO_SIZE / (1024 * 1024)
+        }MB`
+      );
+    }
     if (this.useMockApi) {
       return mockUploadResponse;
     }
