@@ -6,9 +6,10 @@ import {
 } from "../../shared/types";
 import {
   mockGetAllResponse,
-  mockGetResponseFailed,
+  mockGetImageFailed,
   mockGetResponseFinished,
   mockGetResponseUnFinished,
+  mockGetTranscriptionFailed,
   mockUploadResponse,
 } from "./Mocks";
 
@@ -66,8 +67,11 @@ class ApiService {
       if (id === "mock-finished") {
         return mockGetResponseFinished;
       }
-      if (id === "mock-failed") {
-        return mockGetResponseFailed;
+      if (id === "mock-image-failed") {
+        return mockGetImageFailed;
+      }
+      if (id === "mock-transcript-failed") {
+        return mockGetTranscriptionFailed;
       }
       return mockGetResponseUnFinished;
     }

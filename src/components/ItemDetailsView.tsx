@@ -15,6 +15,36 @@ interface ItemDetailsViewProps {
   details?: Item;
   status?: ProcessingStatus;
 }
+function getImageContent(details: Item) {
+  if (details.image) {
+    return (
+      <img
+        src={`data:image/jpeg;base64,${details.image}`}
+        alt="Generated"
+        className="max-w-2xl rounded-lg shadow-sm mx-auto"
+      />
+    );
+  }
+  if (details.processingStatus === ProcessingStatus.IMAGE_FAILED) {
+    return (
+      <img
+        src="/image-failed.svg"
+        alt="Image generation failed"
+        className="max-w-2xl rounded-lg shadow-sm mx-auto"
+      />
+    );
+  }
+  if (details.processingStatus === ProcessingStatus.TRANSCRIPTION_FAILED) {
+    return (
+      <img
+        src="/transcription-failed.svg"
+        alt="Transcription failed"
+        className="max-w-2xl rounded-lg shadow-sm mx-auto"
+      />
+    );
+  }
+  return null;
+}
 const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
   details,
   status,
@@ -29,7 +59,7 @@ const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
       </div>
     );
   }
-
+  const imageDiv = getImageContent(details);
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -42,17 +72,6 @@ const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
-        {details.prompt && (
-          <div className="p-6">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">
-              Generated Prompt
-            </h3>
-            <div className="bg-gray-50 rounded-lg p-4 dark:bg-gray-900/50 rounded-lg p-4 text-gray-700 dark:text-gray-300">
-              {details.prompt}
-            </div>
-          </div>
-        )}
-
         {details.transcription && (
           <div className="p-6">
             <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">
@@ -63,21 +82,24 @@ const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
             </div>
           </div>
         )}
-
-        {details.image && (
+        {details.prompt && (
           <div className="p-6">
             <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">
-              Generated Image
+              Generated Prompt
             </h3>
             <div className="bg-gray-50 rounded-lg p-4 dark:bg-gray-900/50 rounded-lg p-4 text-gray-700 dark:text-gray-300">
-              <img
-                src={`data:image/jpeg;base64,${details.image}`}
-                alt="Generated"
-                className="max-w-2xl rounded-lg shadow-sm mx-auto"
-              />
+              {details.prompt}
             </div>
           </div>
         )}
+        <div className="p-6">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">
+            Generated Image
+          </h3>
+          <div className="bg-gray-50 rounded-lg p-4 dark:bg-gray-900/50 rounded-lg p-4 text-gray-700 dark:text-gray-300">
+            {imageDiv}
+          </div>
+        </div>
 
         {details.audio && (
           <div className="p-6">
