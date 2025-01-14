@@ -11,6 +11,7 @@ import {
   CachePolicy,
   Distribution,
   GeoRestriction,
+  PriceClass,
   ViewerProtocolPolicy,
 } from "aws-cdk-lib/aws-cloudfront";
 import { S3BucketOrigin } from "aws-cdk-lib/aws-cloudfront-origins";
@@ -108,6 +109,7 @@ export class FrontendIacStack extends Stack {
         },
       ],
       geoRestriction: GeoRestriction.allowlist("DE"), // Restrict to Germany
+      priceClass: PriceClass.PRICE_CLASS_100, // Europe, North America and Israel
       logBucket: cloudFrontLogsBucket,
     });
 
